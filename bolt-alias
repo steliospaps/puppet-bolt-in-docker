@@ -1,0 +1,3 @@
+LOCATION=$(realpath $(dirname $BASH_SOURCE))
+docker build -t stelios/puppet-bold $LOCATION
+echo docker run --rm -it stelios/puppet-bold
