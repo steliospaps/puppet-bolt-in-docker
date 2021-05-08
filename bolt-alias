@@ -10,6 +10,7 @@ function bolt-container {
     --volume /etc/group:/etc/group:ro \
     --volume $HOME/.puppetlabs:$HOME/.puppetlabs \
     --user $(id -u):$(id -g) \
+    --network="host" \
     stelios/puppet-bolt "$@"
 }
 function bolt {
