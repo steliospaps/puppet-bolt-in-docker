@@ -1,3 +1,16 @@
 LOCATION=$(realpath $(dirname $BASH_SOURCE))
-docker build -t stelios/puppet-bold $LOCATION
-echo docker run --rm -it stelios/puppet-bold
+docker build -t stelios/puppet-bolt $LOCATION
+echo invoke as 'bolt' it mounts the pwd under /home/bolt
+[ -d ~/.puppetlabs ] || mkdir ~/.puppetlabs
+function bolt-container {
+ # see https://stackoverflow.com/questions/64857370/using-current-user-when-running-container-in-docker-compose
+  docker run --rm -it --volume $(realpath $(pwd)):/home/bolt \
+    --volume /etc/passwd:/etc/passwd:ro \
+    --volume /etc/group:/etc/group:ro \
+    --volume $HOME/.puppetlabs:$HOME/.puppetlabs \
+    --user $(id -u):$(id -g) \
+    stelios/puppet-bolt "$@"
+}
+function bolt {
+  bolt-container bolt "$@"
+}

@@ -1,6 +1,11 @@
-# build
-```bash
-docker build -t stelios/puppet-bold .
+# usage
+
+you need docker installed
+
+```
+git clone https://github.com/steliospaps/puppet-bolt-in-docker
+. puppet-bolt-in-docker/bolt-alias
+bolt --version
 ```
 
-# run 
+It mounts the current directory under the container working directory '/home/bolt'
