@@ -10,6 +10,4 @@ RUN apt-get install puppet-bolt -y
 RUN apt-get purge wget -y
 RUN rm puppet-tools-release-focal.deb
 
-WORKDIR /home/bolt
-
 CMD ["bash"]

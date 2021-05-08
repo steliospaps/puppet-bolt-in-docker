@@ -4,7 +4,8 @@ echo invoke as 'bolt' it mounts the pwd under /home/bolt
 [ -d ~/.puppetlabs ] || mkdir ~/.puppetlabs
 function bolt-container {
  # see https://stackoverflow.com/questions/64857370/using-current-user-when-running-container-in-docker-compose
-  docker run --rm -it --volume $(realpath $(pwd)):/home/bolt \
+  docker run --rm -it --volume $(realpath $(pwd)):$(realpath $(pwd)) \
+    -w $(realpath $(pwd)) \
     --volume /etc/passwd:/etc/passwd:ro \
     --volume /etc/group:/etc/group:ro \
     --volume $HOME/.puppetlabs:$HOME/.puppetlabs \
